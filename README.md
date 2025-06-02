@@ -1,3 +1,5 @@
+![image](https://github.com/DanielEspanadero/ulyses.technical.test/blob/master/docs/septeo.png)
+
 # Instructions
 
 ### What’s included in this repository?
@@ -59,3 +61,134 @@ This repository contains a Spring Boot application with the following structure:
 - If there’s something you’re not sure how to do, don’t worry — just give it your best effort.
 - We will carefully review your code and provide feedback as soon as possible.
  
+
+---
+
+# Application Endpoints
+
+## Brand Endpoints
+
+### Get all brands
+- **GET** `/api/brands`
+- No authentication required
+
+### Get a brand by ID
+- **GET** `/api/brands/1`
+- No authentication required
+
+### Create a new brand
+- **POST** `/api/brands`
+- Requires authentication
+- Request body:
+```json
+{
+  "name": "Toyota"
+}
+```
+
+### Update an existing brand
+- **PUT** `/api/brands/1`
+- Requires authentication
+- Request body:
+```json
+{
+  "name": "Toyota Motors"
+}
+```
+
+### Delete a brand
+- **DELETE** `/api/brands/1`
+- Requires authentication
+
+## Vehicle Endpoints
+
+### Get all vehicles
+- **GET** `/api/vehicles`
+- No authentication required
+
+### Get a vehicle by ID
+- **GET** `/api/vehicles/1`
+- No authentication required
+
+### Create a new vehicle
+- **POST** `/api/vehicles`
+- Requires authentication
+- Request body:
+```json
+{
+  "brand": { "id": 1 },
+  "model": "Corolla",
+  "year": "2022",
+  "color": "Red"
+}
+```
+
+### Update an existing vehicle
+- **PUT** `/api/vehicles/1`
+- Requires authentication
+- Request body:
+```json
+{
+  "brand": { "id": 1 },
+  "model": "Corolla",
+  "year": "2023",
+  "color": "Blue"
+}
+```
+
+### Delete a vehicle
+- **DELETE** `/api/vehicles/1`
+- Requires authentication
+
+## Sale Endpoints
+
+### Get all sales (paginated)
+- **GET** `/api/sales?page=0`
+- No authentication required
+- Optional parameter: `page` (default is 0)
+
+### Get a sale by ID
+- **GET** `/api/sales/1`
+- No authentication required
+
+### Get sales by brand
+- **GET** `/api/sales/brands/1`
+- No authentication required
+
+### Get sales by vehicle
+- **GET** `/api/sales/vehicles/1`
+- No authentication required
+
+### Get top 5 best-selling vehicles
+- **GET** `/api/sales/vehicles/bestSelling`
+- **GET** `/api/sales/vehicles/bestSelling?startDate=2023-01-01&endDate=2023-12-31`
+- No authentication required
+- Optional parameters: `startDate`, `endDate`
+
+### Create a new sale
+- **POST** `/api/sales`
+- Requires authentication
+- Request body:
+```json
+{
+  "vehicle": { "id": 1 },
+  "brand": { "id": 1 },
+  "saleDate": "2023-07-15"
+}
+```
+
+### Update an existing sale
+- **PUT** `/api/sales/1`
+- Requires authentication
+- Request body:
+```json
+{
+  "vehicle": { "id": 2 },
+  "brand": { "id": 1 },
+  "saleDate": "2023-07-20"
+}
+```
+
+### Delete a sale
+- **DELETE** `/api/sales/1`
+- Requires authentication
