@@ -1,5 +1,6 @@
 package com.septeo.ulyses.technical.test.controller;
 
+import com.septeo.ulyses.technical.test.dto.VehicleBestSalesDto;
 import com.septeo.ulyses.technical.test.entity.Sales;
 import com.septeo.ulyses.technical.test.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -44,6 +48,31 @@ public class SalesController {
     public ResponseEntity<List<Sales>> getSalesByVehicle(@PathVariable Long vehicleId) {
         List<Sales> sales = salesService.getSalesByVehicleId(vehicleId);
         return ResponseEntity.ok(sales);
+    }
+
+
+    @GetMapping("/vehicles/bestSelling")
+    public ResponseEntity<List<VehicleBestSalesDto>> getBestSellingVehicles(
+            @RequestParam(value = "startDate", required = false) String startDateStr,
+            @RequestParam(value = "endDate", required = false) String endDateStr) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+
+        try {
+            if (startDateStr != null) {
+                startDate = LocalDate.parse(startDateStr, formatter);
+            }
+            if (endDateStr != null) {
+                endDate = LocalDate.parse(endDateStr, formatter);
+            }
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<VehicleBestSalesDto> bestSellingVehicles = salesService.getBestSellingVehicles(startDate, endDate);
+        return ResponseEntity.ok(bestSellingVehicles);
     }
 
 }

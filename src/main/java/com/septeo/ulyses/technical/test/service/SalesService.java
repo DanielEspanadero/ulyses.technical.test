@@ -1,5 +1,6 @@
 package com.septeo.ulyses.technical.test.service;
 
+import com.septeo.ulyses.technical.test.dto.VehicleBestSalesDto;
 import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.entity.Sales;
 import com.septeo.ulyses.technical.test.entity.Vehicle;
@@ -52,4 +53,13 @@ public interface SalesService {
      * @return a list of all sales
      */
     Page<Sales> getAllSales(Pageable pageable);
+
+    /**
+     * Get best sales by date range.
+     *
+     * @param startDate the start date of the range
+     * @param endDate   the end date of the range
+     * @return a list of the best sales within the specified date range
+     */
+    List<VehicleBestSalesDto> getBestSellingVehicles(LocalDate startDate, LocalDate endDate);
 }
