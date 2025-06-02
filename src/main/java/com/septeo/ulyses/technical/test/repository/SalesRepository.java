@@ -29,4 +29,11 @@ public interface SalesRepository {
      */
     Optional<Sales> findById(Long id);
 
+    /**
+     * Find sales by brand ID.
+     *
+     * @param brandId the ID of the brand
+     * @return a list of sales associated with the specified brand
+     */
+    List<Sales> findByBrandId(Long brandId);
 }
