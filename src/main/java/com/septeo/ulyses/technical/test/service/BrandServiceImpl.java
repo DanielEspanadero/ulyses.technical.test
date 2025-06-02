@@ -1,5 +1,6 @@
 package com.septeo.ulyses.technical.test.service;
 
+import com.septeo.ulyses.technical.test.cache.BrandCache;
 import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,17 @@ public class BrandServiceImpl implements BrandService {
     @Autowired
     private BrandRepository brandRepository;
 
+    private final BrandCache brandCache = new BrandCache();
+
     /**
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Brand> getAllBrands() {
-        return brandRepository.findAll();
+        return brandCache.getOrLoad(brandRepository::findAll);
     }
+
 
     /**
      * {@inheritDoc}
@@ -41,7 +46,9 @@ public class BrandServiceImpl implements BrandService {
      */
     @Override
     public Brand saveBrand(Brand brand) {
-        return brandRepository.save(brand);
+        Brand saved = brandRepository.save(brand);
+        brandCache.clear();
+        return saved;
     }
 
     /**
@@ -50,5 +57,6 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void deleteBrand(Long id) {
         brandRepository.deleteById(id);
+        brandCache.clear();
     }
 }
