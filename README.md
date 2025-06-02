@@ -1,5 +1,11 @@
 ![image](https://github.com/DanielEspanadero/ulyses.technical.test/blob/master/docs/septeo.png)
 
+_Some time ago, I made a video for my YouTube channel about Spring Security, which served as inspiration for this implementation. Since I couldn't use external libraries, I used basic authentication instead of JWT._
+
+<a href='https://www.youtube.com/watch?v=Qu3soRF168I' target='_blank'>
+  <img width='30%' src='https://i.ytimg.com/vi/Qu3soRF168I/maxresdefault.jpg' alt='🛡️🔒 SPRING SECURITY [EXPLICACIÓN + PROYECTO COMPLETO] 💻🔥 | DE 0 A SUPER SAIYAN LEGENDARIO' />
+</a>
+
 # Instructions
 
 ### What’s included in this repository?
