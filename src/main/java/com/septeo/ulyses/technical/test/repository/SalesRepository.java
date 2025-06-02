@@ -3,6 +3,8 @@ package com.septeo.ulyses.technical.test.repository;
 import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.entity.Sales;
 import com.septeo.ulyses.technical.test.entity.Vehicle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -44,4 +46,13 @@ public interface SalesRepository {
      * @return a list of sales associated with the specified vehicle
      */
     List<Sales> findByVehicleId(Long vehicleId);
+
+
+    /**
+     * Find all sales with pagination.
+     *
+     * @return a list of all sales
+     */
+    Page<Sales> getAllSales(Pageable pageable);
+
 }

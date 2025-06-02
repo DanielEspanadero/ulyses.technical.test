@@ -3,6 +3,8 @@ package com.septeo.ulyses.technical.test.service;
 import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.entity.Sales;
 import com.septeo.ulyses.technical.test.entity.Vehicle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,4 +45,11 @@ public interface SalesService {
      * @return a list of sales associated with the specified vehicle
      */
     List<Sales> getSalesByVehicleId(Long vehicleId);
+
+    /**
+     * Get all sales with Pageable.
+     *
+     * @return a list of all sales
+     */
+    Page<Sales> getAllSales(Pageable pageable);
 }

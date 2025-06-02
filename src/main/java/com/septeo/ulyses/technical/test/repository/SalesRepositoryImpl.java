@@ -7,6 +7,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -59,5 +62,24 @@ public class SalesRepositoryImpl implements SalesRepository {
         query.setParameter("vehicleId", vehicleId);
 
         return query.getResultList();
+    }
+
+    @Override
+    public Page<Sales> getAllSales(Pageable pageable) {
+        String stringQuery = "SELECT s FROM Sales s";
+        Query query = entityManager.createQuery(stringQuery);
+        query.setFirstResult((int) pageable.getOffset());
+        query.setMaxResults(pageable.getPageSize());
+
+        List<Sales> salesList = query.getResultList();
+        long total = countSales();
+
+        return new PageImpl<>(salesList, pageable, total);
+    }
+
+    private long countSales() {
+        String countQuery = "SELECT COUNT(s) FROM Sales s";
+        Query query = entityManager.createQuery(countQuery);
+        return (long) query.getSingleResult();
     }
 }
