@@ -35,4 +35,12 @@ public interface SalesService {
      * @return a list of sales associated with the specified brand
      */
     List<Sales> getSalesByBrandId(Long brandId);
+
+    /**
+     * Get sales by vehicle ID.
+     *
+     * @param vehicleId the ID of the vehicle
+     * @return a list of sales associated with the specified vehicle
+     */
+    List<Sales> getSalesByVehicleId(Long vehicleId);
 }

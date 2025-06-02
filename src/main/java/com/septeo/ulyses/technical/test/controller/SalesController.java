@@ -35,4 +35,11 @@ public class SalesController {
         List<Sales> sales = salesService.getSalesByBrandId(brandId);
         return ResponseEntity.ok(sales);
     }
+
+    @GetMapping("/vehicles/{vehicleId}")
+    public ResponseEntity<List<Sales>> getSalesByVehicle(@PathVariable Long vehicleId) {
+        List<Sales> sales = salesService.getSalesByVehicleId(vehicleId);
+        return ResponseEntity.ok(sales);
+    }
+
 }

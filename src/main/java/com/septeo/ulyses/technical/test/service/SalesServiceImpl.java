@@ -41,7 +41,13 @@ public class SalesServiceImpl implements SalesService {
      */
     @Override
     public List<Sales> getSalesByBrandId(Long brandId) {
-        return salesRepository.findByBrandId(brandId);    }
+        return salesRepository.findByBrandId(brandId);
+    }
+
+    @Override
+    public List<Sales> getSalesByVehicleId(Long vehicleId) {
+        return salesRepository.findByVehicleId(vehicleId);
+    }
 
 
 }
